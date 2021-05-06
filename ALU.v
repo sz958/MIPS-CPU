@@ -79,7 +79,7 @@ module ALU(op,in0,in1,out,overflow,zero,carryout);
                 //add_out=add_out_com;
                 overflow=((in0[31]==in1[31])&&(~out[31]==in0[31]))?1:0;
                 zero=(out==0)?1:0;
-                carryout=0; //�з��żӷ����λ�Ƿ���λ���ʿ���������ɣ���λ��ֵ0
+                carryout=0; 
             end
         //addu
         11'b00000100001:
