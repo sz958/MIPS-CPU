@@ -10,10 +10,11 @@ module InstructionMem (
     output [31:0] inst
         );
 
-    reg[31:0] mem[0:31];
+    reg[7:0] mem[0:127];
     initial begin
-        $readmemh("F:\\CPU\\MIPS-CPU-main\\imem.txt",mem);  //使用二进制存放指令，故用readmemb
+        $readmemh("F:\\CPU\\MIPS-CPU-main\\imem.txt",mem);  //使用十六进制存放指令，故用readmemh
     end
+    /*
     assign inst=mem[PC];
     assign op=mem[PC][31:26];
     assign rs=mem[PC][25:21];
@@ -22,8 +23,12 @@ module InstructionMem (
     assign funct=mem[PC][5:0];
     assign immediate=mem[PC][15:0];
     assign address=mem[PC][25:0];
+    */
     //分割指令
-    /*
+    assign inst[31:24]=mem[PC];
+    assign inst[23:16]=mem[PC+1];
+    assign inst[15:8]=mem[PC+2];
+    assign inst[7:0]=mem[PC+3];    
     assign op=mem[PC][7:2];
     assign rs[4:3]=mem[PC][1:0];
     assign rs[2:0]=mem[PC+1][7:5];
@@ -36,5 +41,5 @@ module InstructionMem (
     assign address[23:16]=mem[PC+1];
     assign address[15:8]=mem[PC+2];
     assign address[7:0]=mem[PC+3];
-    */
+
 endmodule //InstructionMem

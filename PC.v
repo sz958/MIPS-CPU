@@ -1,6 +1,6 @@
 module PC (
     input clk,
-    input rst,  //∏¥Œª–≈∫≈
+    input rst,  //Â§ç‰Ωç‰ø°Âè∑
     input [31:0] pc,
     output reg [31:0] PC
     );

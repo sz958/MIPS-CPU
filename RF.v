@@ -11,8 +11,7 @@ module RF (
     );
 
     reg [31:0] register[0:31];
-    //初始化寄存器
-    
+
     //写寄存器
     always @(posedge clk,posedge rst) begin
         if(rst)

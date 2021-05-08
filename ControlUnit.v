@@ -6,13 +6,13 @@ module ControlUnit (
     output MemWrite,    //存储器写使能信号
     output MemRead,      //数据存储器读使能信号
     output [3:0] ALUOp, //ALU运算功能选择
-    output ALUSrc1,     //ALU操作数1来源选择
-    output ALUSrc2,     //ALU操作数2来源选择
-    output RegDst,      //写回操作的数据来源
-    output RegWrite,     //寄存器堆写使能信源
+    output ALUSrc1,     //ALU操作�?1来源选择
+    output ALUSrc2,     //ALU操作�?2来源选择
+    output RegDst,      //写回操作的数据来�?
+    output RegWrite,     //寄存器堆写使能信�?
     output Branch,      //配合ALU零标志输出生成PCSrc
     output Jump,        //跳转标志
-    output sign_ext     //是否为符号扩展
+    output sign_ext     //是否为符号扩�?
         ); 
 
     //先根据Op和funct确定执行的指令，然后根据执行的指令用到的数据通路确定控制信号
@@ -63,10 +63,10 @@ module ControlUnit (
     assign Jump=j;
     assign sign_ext=lw|sw|beq;
 
-    assign ALUOp[3]=slt|sltu|sllv|srlv|srav;
-    assign ALUOp[2]=And|Or|Xor|Nor|srav;
-    assign ALUOp[1]=sub|subu|Xor|Nor|sllv|srlv;
-    assign ALUOp[0]=addu|subu|Or|Nor|sltu|srlv;
+    assign ALUOp[3]=slt|sltu|sllv|sll|srlv|srl|srav|sra;
+    assign ALUOp[2]=And|Or|ori|Xor|xori|Nor|srav|srav;
+    assign ALUOp[1]=sub|beq|subu|Xor|xori|Nor|sllv|sll|srlv|srl;
+    assign ALUOp[0]=addu|addiu|subu|Or|ori|Nor|sltu|srlv|srl;
     /*
     assign RegDst=~op[5]&~op[4]&~op[3]&~op[2]&~op[1]&~op[0];
     assign ALUSrc=(op[5]&~op[4]&~op[3]&~op[2]&op[1]&op[0])|(op[5]&~op[4]&op[3]&~op[2]&op[1]&op[0]);
