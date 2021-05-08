@@ -11,7 +11,7 @@ module Ext5(
         end
         else
         begin
-            shamt32[31:0]=32'h11111111;
+            shamt32[31:0]=32'h00000000;
             shamt32[4:0]=shamt[4:0];
         end
     end
