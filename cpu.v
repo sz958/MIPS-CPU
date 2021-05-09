@@ -39,7 +39,7 @@ module cpu(
     Ext16 ext16(immediate,sign_ext,ext16_out);
     //Ext18 ext18(immediate<<2,ext18_out);
     Mux_32 mux4(ext16_out,RF_ReadData2,ALUSrc2,mux4_out);
-    ALU alu(ALUOp,mux3_out,mux4_out,alu_out,alu_overflow,alu_zero,alu_carryout);   //mux3_out(in0)â€”â?”RF_ReadData1â€”â?”rs,mux4_out(in1)â€”â?”RF_ReadData2â€”â?”rt
+    ALU alu(ALUOp,mux3_out,mux4_out,alu_out,alu_overflow,alu_zero,alu_carryout);   
     DataMemory datamemory(clk,rst,MemRead,MemWrite,alu_out,RF_ReadData2,DataMem_out);
     Mux_32 mux5(DataMem_out,alu_out,MemtoReg,mux5_out);
     shifter_2 s2(ext16_out,cin,s2_out);
