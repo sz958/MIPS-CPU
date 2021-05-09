@@ -16,38 +16,38 @@ module RF (
     always @(posedge clk,posedge rst) begin
         if(rst)
             begin
-            register[0]=0;
-            register[1]=0;
-            register[2]=0;
-            register[3]=0;
-            register[4]=0;
-            register[5]=0;
-            register[6]=0;
-            register[7]=0;
-            register[8]=0;
-            register[9]=0;
-            register[10]=0;
-            register[11]=0;
-            register[12]=0;
-            register[13]=0;
-            register[14]=0;
-            register[15]=0;
-            register[16]=0;
-            register[17]=0;
-            register[18]=0;
-            register[19]=0;
-            register[20]=0;
-            register[21]=0;
-            register[22]=0;
-            register[23]=0;
-            register[24]=0;
-            register[25]=0;
-            register[26]=0;
-            register[27]=0;
-            register[28]=0;
-            register[29]=0;
-            register[30]=0;
-            register[31]=0;
+            register[0]<=0;
+            register[1]<=1;
+            register[2]<=2;
+            register[3]<=3;
+            register[4]<=4;
+            register[5]<=5;
+            register[6]<=6;
+            register[7]<=7;
+            register[8]<=8;
+            register[9]<=9;
+            register[10]<=10;
+            register[11]<=11;
+            register[12]<=12;
+            register[13]<=13;
+            register[14]<=14;
+            register[15]<=15;
+            register[16]<=16;
+            register[17]<=17;
+            register[18]<=18;
+            register[19]<=19;
+            register[20]<=20;
+            register[21]<=21;
+            register[22]<=22;
+            register[23]<=23;
+            register[24]<=24;
+            register[25]<=25;
+            register[26]<=26;
+            register[27]<=27;
+            register[28]<=28;
+            register[29]<=29;
+            register[30]<=30;
+            register[31]<=31;
             end
         else
             if(RegWrite&&WriteReg)

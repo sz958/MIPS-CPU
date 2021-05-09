@@ -6,13 +6,13 @@ module ControlUnit (
     output MemWrite,    //存储器写使能信号
     output MemRead,      //数据存储器读使能信号
     output [3:0] ALUOp, //ALU运算功能选择
-    output ALUSrc1,     ///ALU操作数1来源选择
-    output ALUSrc2,     ///ALU操作数2来源选择
-    output RegDst,      //写回操作的数据来源
-    output RegWrite,     //寄存器堆写使能信号
+    output ALUSrc1,     //ALU操作�?1来源选择
+    output ALUSrc2,     //ALU操作�?2来源选择
+    output RegDst,      //写回操作的数据来�?
+    output RegWrite,     //寄存器堆写使能信�?
     output Branch,      //配合ALU零标志输出生成PCSrc
     output Jump,        //跳转标志
-    output sign_ext     //是否为符号扩展
+    output sign_ext     //是否为符号扩�?
         ); 
 
     //先根据Op和funct确定执行的指令，然后根据执行的指令用到的数据通路确定控制信号
