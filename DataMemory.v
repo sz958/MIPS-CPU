@@ -1,11 +1,11 @@
 module DataMemory(
     input clk,
     input rst,
-    input MemRead,  //读使能信�?
-    input MemWrite, //写使能信�?
+    input MemRead,  //读使能信号
+    input MemWrite, //写使能信号
     input [31:0] address,   //写入地址
-    input [31:0] wdata, //写数�?
-    output [31:0] rdata //读数�?
+    input [31:0] wdata, //写数据
+    output [31:0] rdata //读数据
     );
     reg [7:0] datamemory [0:31];
     always @(posedge clk,posedge rst) begin
