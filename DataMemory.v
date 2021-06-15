@@ -8,7 +8,7 @@ module DataMemory(
     output [31:0] rdata //读数据
     );
     reg [7:0] datamemory [0:31];
-    always @(posedge clk,posedge rst) begin
+    always @(posedge clk) begin
     if(rst)
         begin
         datamemory[0]<=0;
