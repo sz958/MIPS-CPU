@@ -27,7 +27,7 @@ module cpu(
     //wire [15:0] immediate;
     //wire [3:0] ALUOp;
     wire MemtoReg,MemWrite,MemRead,ALUSrc1,ALUSrc2,RegDst,RegWrite,Branch,Jump,sign_ext,add_carry;
-    PC pc(clk,rst,mux2_out,pc_out);
+    PC pc(clk,rst,mux3_out,pc_out);
     PCPlus4 pc4(pc_out,pc4_out);
     InstructionMem InsMem(pc_out,op,rs,rt,rd,funct,immediate,address1,inst);
     assign shamt[4:0]=immediate[10:6];
