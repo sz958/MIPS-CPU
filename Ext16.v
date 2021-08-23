@@ -1,4 +1,5 @@
-//用于ori指令的immediate无符号扩展，beq指令的immediate符号扩展以及lw/sw中offset的符号扩展
+`timescale 1ns / 1ps
+
 module Ext16(
     input [15:0] imm16,
     input sign_ext,

@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module ControlUnit (
     input [5:0] op,
     input [5:0] funct,
@@ -6,19 +8,19 @@ module ControlUnit (
     output MemWrite,    //存储器写使能信号
     output MemRead,      //数据存储器读使能信号
     output [3:0] ALUOp, //ALU运算功能选择
-    output ALUSrc1,     //ALU操作�?1来源选择
-    output ALUSrc2,     //ALU操作�?2来源选择
-    output RegDst,      //写回操作的数据来�?
-    output RegWrite,     //寄存器堆写使能信�?
+    output ALUSrc1,     //ALU操作数1来源选择
+    output ALUSrc2,     //ALU操作数2来源选择
+    output RegDst,      //写回操作的数据来源
+    output RegWrite,     //寄存器堆写使能信号
     output Branch,      //配合ALU零标志输出生成PCSrc
     output Jump,        //跳转标志
-    output sign_ext     //是否为符号扩�?
+    output sign_ext     //是否为符号扩展
         ); 
 
     //先根据Op和funct确定执行的指令，然后根据执行的指令用到的数据通路确定控制信号
     wire R_type;
-    wire add,addu,sub,subu,And,Or,Xor,Nor,slt,sltu,sll,srl,sra,sllv,srlv,srav,j;
-    wire addi,addiu,ori,xori,lw,sw,beq,bne;
+    wire add,addu,sub,subu,And,Or,Xor,Nor,slt,sltu,sll,srl,sra,sllv,srlv,srav;
+    wire addi,addiu,andi,ori,xori,lw,sw,beq,bne;
     wire j;
     assign R_type=~|op;
     //R type
@@ -42,6 +44,7 @@ module ControlUnit (
     //I type
     assign addi=~op[5]&~op[4]&op[3]&~op[2]&~op[1]&~op[0];   //001000
     assign addiu=~op[5]&~op[4]&op[3]&~op[2]&~op[1]&op[0];   //001001
+    assign andi=~op[5]&~op[4]&op[3]&op[2]&~op[1]&~op[0];   //001100
     assign ori=~op[5]&~op[4]&op[3]&op[2]&~op[1]&op[0];      //001101
     assign xori=~op[5]&~op[4]&op[3]&op[2]&op[1]&~op[0];     //001110
     assign lw=op[5]&~op[4]&~op[3]&~op[2]&op[1]&op[0];       //100011
@@ -56,15 +59,15 @@ module ControlUnit (
     assign MemWrite=sw;
     assign MemRead=lw;
     assign Branch=beq|bne;
-    assign ALUSrc1=add|addu|sub|subu|And|Or|Xor|Nor|slt|sltu|addi|addiu|ori|xori|lw|sw|beq|bne;
-    assign ALUSrc2=addi|addiu|ori|xori|lw|sw;
+    assign ALUSrc1=add|addu|sub|subu|And|Or|Xor|Nor|slt|sltu|addi|addiu|andi|ori|xori|lw|sw|beq|bne|sllv|srlv|srav;
+    assign ALUSrc2=addi|addiu|andi|ori|xori|lw|sw;
     assign RegDst=add|addu|sub|subu|And|Or|Xor|Nor|slt|sltu|sll|srl|sra|sllv|srlv|srav;
-    assign RegWrite=add|addu|sub|subu|And|Or|Xor|Nor|slt|sltu|sll|srl|sra|sllv|srlv|srav|addi|addiu|ori|xori|lw;
+    assign RegWrite=add|addu|sub|subu|And|Or|Xor|Nor|slt|sltu|sll|srl|sra|sllv|srlv|srav|addi|addiu|andi|ori|xori|lw;
     assign Jump=j;
     assign sign_ext=lw|sw|beq;
 
     assign ALUOp[3]=slt|sltu|sllv|sll|srlv|srl|srav|sra;
-    assign ALUOp[2]=And|Or|ori|Xor|xori|Nor|srav|srav;
+    assign ALUOp[2]=And|andi|Or|ori|Xor|xori|Nor|srav|srav;
     assign ALUOp[1]=sub|beq|subu|Xor|xori|Nor|sllv|sll|srlv|srl;
     assign ALUOp[0]=addu|addiu|subu|Or|ori|Nor|sltu|srlv|srl;
     /*

@@ -1,4 +1,5 @@
-//用于移位操作，对移位数shamt进行扩充
+`timescale 1ns / 1ps
+
 module Ext5(
     input [4:0] shamt,
     output reg [31:0] shamt32

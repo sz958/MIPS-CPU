@@ -1,8 +1,12 @@
+`timescale 1ns / 1ps
 module cpu(
     input clk,
     input rst,
+    output clk_out,
     output [31:0] pc_out,
     output [31:0] mux5_out,
+    output [31:0] mux4_out,
+    output [31:0] mux3_out,
     output [31:0] RF_ReadData1,
     output [31:0] RF_ReadData2,
     output [31:0] ext5_out,
@@ -18,7 +22,7 @@ module cpu(
     //output clk_out
     );
     parameter cin=0;
-    wire [31:0] mux2_out,pc4_out,ext16_out,mux4_out,ext5_out,mux3_out,s2_out,add_out,join_out,mux1_out;
+    wire [31:0] mux2_out,pc4_out,mux4_out,mux3_out,s2_out,add_out,join_out,mux1_out;
     wire [25:0] address1;
     wire [15:0] immediate;
     wire [27:0] address2=address1<<2;
@@ -27,7 +31,8 @@ module cpu(
     //wire [15:0] immediate;
     //wire [3:0] ALUOp;
     wire MemtoReg,MemWrite,MemRead,ALUSrc1,ALUSrc2,RegDst,RegWrite,Branch,Jump,sign_ext,add_carry;
-    PC pc(clk,rst,mux3_out,pc_out);
+    assign clk_out=clk;
+    PC pc(clk,rst,mux2_out,pc_out);
     PCPlus4 pc4(pc_out,pc4_out);
     InstructionMem InsMem(pc_out,op,rs,rt,rd,funct,immediate,address1,inst);
     assign shamt[4:0]=immediate[10:6];
@@ -39,7 +44,7 @@ module cpu(
     Ext16 ext16(immediate,sign_ext,ext16_out);
     //Ext18 ext18(immediate<<2,ext18_out);
     Mux_32 mux4(ext16_out,RF_ReadData2,ALUSrc2,mux4_out);
-    ALU alu(ALUOp,mux3_out,mux4_out,alu_out,alu_overflow,alu_zero,alu_carryout);   
+    ALU alu(ALUOp,mux3_out,mux4_out,alu_out,alu_overflow,alu_zero,alu_carryout);   //mux3_out(in0)—�?�RF_ReadData1—�?�rs,mux4_out(in1)—�?�RF_ReadData2—�?�rt
     DataMemory datamemory(clk,rst,MemRead,MemWrite,alu_out,RF_ReadData2,DataMem_out);
     Mux_32 mux5(DataMem_out,alu_out,MemtoReg,mux5_out);
     shifter_2 s2(ext16_out,cin,s2_out);

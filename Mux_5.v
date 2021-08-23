@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module Mux_5 (in0,in1,control,out);
     input [4:0] in0;
     input [4:0] in1;

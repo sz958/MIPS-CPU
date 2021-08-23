@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module Join(
     input [27:0] address,
     input [3:0] pc4_out,

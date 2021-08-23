@@ -1,14 +1,16 @@
+`timescale 1ns / 1ps
+
 module DataMemory(
     input clk,
     input rst,
-    input MemRead,  //读使能信号
-    input MemWrite, //写使能信号
-    input [31:0] address,   //写入地址
-    input [31:0] wdata, //写数据
-    output [31:0] rdata //读数据
+    input MemRead,  
+    input MemWrite, 
+    input [31:0] address,  
+    input [31:0] wdata, 
+    output [31:0] rdata 
     );
     reg [7:0] datamemory [0:31];
-    always @(posedge clk) begin
+    always @(posedge clk,posedge rst) begin
     if(rst)
         begin
         datamemory[0]<=0;
